@@ -9,4 +9,51 @@
     <string name="cancel">Mégse</string>
     <string name="passAgain">Jelszó megerősítése</string>
     <string name="email">E-mail cím</string>
+    <string name="toCart">Kosárba</string>
+
+
+    <string name="titlePlaceholder">Név</string>
+    <string name="descriptionPlaceholder">Leírás</string>
+    <string name="item_info">Információ a termékről</string>
+    <string name="price">Ár</string>
+
+    <string-array name="itemTitles">
+        <item>Kenyér</item>
+        <item>Tej</item>
+        <item>Vaj</item>
+        <item>Marhahús</item>
+        <item>Kalács</item>
+    </string-array>
+
+    <string-array name="itemDescriptions">
+        <item>Fehér kenyér</item>
+        <item>2,8% zsírtartalmú tej</item>
+        <item>Ez vaj</item>
+        <item>Magyar termék</item>
+        <item>Fonott kalács</item>
+    </string-array>
+
+    <array name="itemRates">
+        <item>5.0</item>
+        <item>4.2</item>
+        <item>3.8</item>
+        <item>5.0</item>
+        <item>3.5</item>
+    </array>
+
+    <array name="itemImages">
+        <item>@drawable/bread</item>
+        <item>@drawable/milk</item>
+        <item>@drawable/butter</item>
+        <item>@drawable/meat</item>
+        <item>@drawable/kalacs</item>
+    </array>
+
+    <array name="itemPrices">
+        <item>350 Ft</item>
+        <item>280 Ft</item>
+        <item>525 Ft</item>
+        <item>1600 Ft</item>
+        <item>970 Ft</item>
+    </array>
 </resources>

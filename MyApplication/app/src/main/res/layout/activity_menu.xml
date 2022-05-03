@@ -4,12 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/mainRecycleView"
-        android:layout_width="match_parent"
-         android:layout_height="match_parent"
-        android:scrollbars="vertical" />
+    tools:context=".MenuActivity">
 
 </androidx.constraintlayout.widget.ConstraintLayout>
