@@ -1,12 +1,16 @@
 package hu.mobilalk.shop;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.SearchView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -23,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private ItemAdapter itemAdapter;
 
     private int gridNumber = 1;
+    private boolean viewRow = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +69,69 @@ public class MainActivity extends AppCompatActivity {
         itemsImage.recycle();
 
         itemAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+
+        getMenuInflater().inflate(R.menu.menu, menu);
+        MenuItem menuItem = menu.findItem(R.id.menuSearch);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                Log.d(LOG_TAG, s);
+                itemAdapter.getFilter().filter(s);
+
+                return false;
+            }
+        });
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.menuLogOut: {
+                Log.d(LOG_TAG, "Kijelentkezett a felhasznalo!");
+                FirebaseAuth.getInstance().signOut();
+                finish();
+                return true;
+            }
+            case R.id.menuSettings: {
+                Log.d(LOG_TAG, "menuSetting clicked");
+                return true;
+            }
+            case R.id.menuCart: {
+                Log.d(LOG_TAG, "menuCart clicked");
+                return true;
+            }
+            case R.id.menuSelector: {
+                Log.d(LOG_TAG, "menuSelector clicked");
+                if(viewRow) {
+                    changeSpanCount(item, R.drawable.ic_grid, 1);
+                }
+                else {
+                    changeSpanCount(item, R.drawable.ic_row, 2);
+                }
+                return true;
+            }
+            default: return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void changeSpanCount(MenuItem item, int ic_grid, int i) {
+        viewRow = !viewRow;
+        item.setIcon(ic_grid);
+        GridLayoutManager layoutManager = (GridLayoutManager) recyclerView.getLayoutManager();
+        layoutManager.setSpanCount(i);
     }
 
     @Override
