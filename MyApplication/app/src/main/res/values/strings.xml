@@ -16,6 +16,7 @@
     <string name="descriptionPlaceholder">Leírás</string>
     <string name="item_info">Információ a termékről</string>
     <string name="price">Ár</string>
+    <string name="this_is_an_image">Ez egy kép</string>
 
     <string-array name="itemTitles">
         <item>Kenyér</item>

@@ -49,17 +49,14 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()) {
-                    Log.d(LOG_TAG, "Sikeres bejelentkezés!");
-                    startMain();
-                }
-                else {
-                    Log.d(LOG_TAG, "Sikertelen bejelentkezés!");
-                    Toast.makeText(LoginActivity.this, "Sikertelen bejelentkezés: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
-                }
+        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, task -> {
+            if(task.isSuccessful()) {
+                Log.d(LOG_TAG, "Sikeres bejelentkezés!");
+                startMain();
+            }
+            else {
+                Log.d(LOG_TAG, "Sikertelen bejelentkezés!");
+                Toast.makeText(LoginActivity.this, "Sikertelen bejelentkezés: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -70,17 +67,14 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onLoginAsGuest(View view) {
-        mAuth.signInAnonymously().addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()) {
-                    Log.d(LOG_TAG, "Sikeres anonim bejelentkezés!");
-                    startMain();
-                }
-                else {
-                    Log.d(LOG_TAG, "Sikertelen anonim bejelentkezés!");
-                    Toast.makeText(LoginActivity.this, "Sikertelen anonim bejelentkezés: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
-                }
+        mAuth.signInAnonymously().addOnCompleteListener(this, task -> {
+            if(task.isSuccessful()) {
+                Log.d(LOG_TAG, "Sikeres anonim bejelentkezés!");
+                startMain();
+            }
+            else {
+                Log.d(LOG_TAG, "Sikertelen anonim bejelentkezés!");
+                Toast.makeText(LoginActivity.this, "Sikertelen anonim bejelentkezés: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
