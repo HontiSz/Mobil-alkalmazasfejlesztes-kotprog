@@ -58,9 +58,8 @@ public class RegistrationActivity extends AppCompatActivity {
 
         Log.i(LOG_TAG, str);
 
-        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
+        if(password.equals(passwordAgain)) {
+            mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, task -> {
                 if(task.isSuccessful()) {
                     startMain();
                 }
@@ -68,8 +67,11 @@ public class RegistrationActivity extends AppCompatActivity {
                     Log.d(LOG_TAG, "Sikertelen regisztráció!");
                     Toast.makeText(RegistrationActivity.this, "Sikertelen regisztráció!: " + task.getException().getMessage(),  Toast.LENGTH_LONG).show();
                 }
-            }
-        });
+            });
+        }
+        else {
+            Toast.makeText(RegistrationActivity.this, "Sikertelen regisztráció: A jelszó nem egyezik meg a jelszó megerősítéssel!", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void onCancel(View view) {
