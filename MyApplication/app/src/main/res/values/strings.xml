@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Web Shop</string>
+    <string name="app_name">Árukereső portál kategóriákkal és rendezési lehetőségekkel</string>
     <string name="username">Felhasználónév</string>
     <string name="pass">Jelszó</string>
     <string name="registration">Regisztráció</string>
@@ -19,10 +19,10 @@
     <string name="this_is_an_image">Ez egy kép</string>
     <string name="search">Keresés</string>
     <string name="logOut">Kijelentkezés</string>
-    <string name="settings">Beállítások</string>
     <string name="select">Választ</string>
     <string name="a_z"><![CDATA[a->z]]></string>
     <string name="z_a"><![CDATA[z->a]]></string>
+    <string name="deleteUser">Felhasználó törlése</string>
 
     <string-array name="itemTitles">
         <item>Kenyér</item>

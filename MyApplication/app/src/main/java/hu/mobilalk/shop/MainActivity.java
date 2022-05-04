@@ -149,8 +149,10 @@ public class MainActivity extends AppCompatActivity {
                 finish();
                 return true;
             }
-            case R.id.menuSettings: {
-                Log.d(LOG_TAG, "menuSetting clicked");
+            case R.id.menuDeleteUser: {
+                Log.d(LOG_TAG, "menuDeleteUser clicked");
+                user.delete();
+                finish();
                 return true;
             }
             case R.id.menuSelector: {
@@ -210,11 +212,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
+        handler.cancelNotification();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+
     }
 
     @Override

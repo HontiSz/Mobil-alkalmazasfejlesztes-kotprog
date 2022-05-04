@@ -23,8 +23,8 @@
         android:orderInCategory="1"/>
 
     <item
-        android:id="@+id/menuSettings"
-        android:title="@string/settings"
+        android:id="@+id/menuDeleteUser"
+        android:title="@string/deleteUser"
         app:showAsAction="never"
         app:actionViewClass="android.widget.ImageView"
         android:orderInCategory="2"/>
