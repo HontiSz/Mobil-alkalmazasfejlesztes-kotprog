@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
         Log.i(LOG_TAG, "Bejelentkezett: " + email + "\tJelszava: " + password);
 
         if(email.isEmpty() || password.isEmpty()) {
-            Toast.makeText(LoginActivity.this, "Tötlsön ki minden mezőt!", Toast.LENGTH_LONG).show();
+            Toast.makeText(LoginActivity.this, "Tötlsön ki minden mezőt! (。_。)", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -56,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
             }
             else {
                 Log.d(LOG_TAG, "Sikertelen bejelentkezés!");
-                Toast.makeText(LoginActivity.this, "Sikertelen bejelentkezés: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(LoginActivity.this, "Sikertelen bejelentkezés: " + task.getException().getMessage() + " (。_。)", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -74,7 +74,7 @@ public class LoginActivity extends AppCompatActivity {
             }
             else {
                 Log.d(LOG_TAG, "Sikertelen anonim bejelentkezés!");
-                Toast.makeText(LoginActivity.this, "Sikertelen anonim bejelentkezés: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(LoginActivity.this, "Sikertelen anonim bejelentkezés: " + task.getException().getMessage() + " (。_。)", Toast.LENGTH_LONG).show();
             }
         });
     }

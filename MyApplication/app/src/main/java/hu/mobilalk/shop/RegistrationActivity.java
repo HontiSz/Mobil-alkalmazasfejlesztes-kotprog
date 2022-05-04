@@ -53,11 +53,6 @@ public class RegistrationActivity extends AppCompatActivity {
         String passwordAgain = passwordAgainEt.getText().toString();
         String email = emailEt.getText().toString();
 
-        String str = "Regisztrált: " + username + ", jelszava: " + (password.equals(passwordAgain) ? password + ", email: " :
-                "a két jelszó nem egyezik meg, email: ") + email;
-
-        Log.i(LOG_TAG, str);
-
         if(password.equals(passwordAgain)) {
             mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, task -> {
                 if(task.isSuccessful()) {
@@ -65,12 +60,12 @@ public class RegistrationActivity extends AppCompatActivity {
                 }
                 else {
                     Log.d(LOG_TAG, "Sikertelen regisztráció!");
-                    Toast.makeText(RegistrationActivity.this, "Sikertelen regisztráció!: " + task.getException().getMessage(),  Toast.LENGTH_LONG).show();
+                    Toast.makeText(RegistrationActivity.this, "Sikertelen regisztráció!: " + task.getException().getMessage() + " (。_。)",  Toast.LENGTH_LONG).show();
                 }
             });
         }
         else {
-            Toast.makeText(RegistrationActivity.this, "Sikertelen regisztráció: A jelszó nem egyezik meg a jelszó megerősítéssel!", Toast.LENGTH_LONG).show();
+            Toast.makeText(RegistrationActivity.this, "Sikertelen regisztráció: A jelszó nem egyezik meg a jelszó megerősítéssel! (。_。)", Toast.LENGTH_LONG).show();
         }
     }
 
