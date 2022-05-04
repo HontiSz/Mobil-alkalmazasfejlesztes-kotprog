@@ -12,7 +12,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.SearchView;
 
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -35,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
 
     private int gridNumber = 1;
     private boolean viewRow = true;
+
+    private NotificationHandler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +62,10 @@ public class MainActivity extends AppCompatActivity {
         itemCollection = firestore.collection("Items");
 
         queryData();
+
+        handler = new NotificationHandler(this);
+
+        handler.cancelNotification();
     }
 
     private void queryData() {
@@ -167,6 +172,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void updateCount(Items currentItem) {
+        itemCollection.document(currentItem._getId()).update("count", currentItem.getCount() + 1).addOnSuccessListener(unused -> Log.d(LOG_TAG, "Sikeres count növelés!"));
+
+        handler.sendNotification("Növelt count: " + currentItem.getName());
+        queryData();
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -195,10 +207,5 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-    }
-
-    public void updateCount(Items currentItem) {
-        itemCollection.document(currentItem._getId()).update("count", currentItem.getCount() + 1).addOnSuccessListener(unused -> Log.d(LOG_TAG, "Sikeres count növelés!"));
-        queryData();
     }
 }
