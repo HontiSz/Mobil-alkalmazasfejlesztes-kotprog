@@ -22,6 +22,7 @@
             android:layout_below="@id/list_itemImageView"
             android:padding="8dp"
             android:text="@string/titlePlaceholder"
+            android:textSize="50sp"
             android:textColor="?android:textColorPrimaryInverse"/>
 
         <RatingBar

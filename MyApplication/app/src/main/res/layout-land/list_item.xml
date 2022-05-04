@@ -12,6 +12,7 @@
             android:id="@+id/list_itemImageView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:maxHeight="100dp"
             android:adjustViewBounds="true"
             android:contentDescription="@string/this_is_an_image" />
 
@@ -22,6 +23,7 @@
             android:layout_below="@id/list_itemImageView"
             android:padding="8dp"
             android:text="@string/titlePlaceholder"
+            android:textSize="50sp"
             android:textColor="?android:textColorPrimaryInverse" />
 
         <RatingBar
