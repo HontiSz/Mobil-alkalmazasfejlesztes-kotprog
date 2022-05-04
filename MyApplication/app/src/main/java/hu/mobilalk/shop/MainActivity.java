@@ -66,11 +66,12 @@ public class MainActivity extends AppCompatActivity {
     private void queryData() {
         items.clear();
 
-        itemCollection.orderBy("name").limit(10).get().addOnSuccessListener(queryDocumentSnapshots -> {
+        itemCollection.orderBy("name").limit(5).get().addOnSuccessListener(queryDocumentSnapshots -> {
             for(QueryDocumentSnapshot snapshot : queryDocumentSnapshots) {
                 Items item = snapshot.toObject(Items.class);
+                item.setId(snapshot.getId());
                 items.add(item);
-                Log.i(LOG_TAG, "Betöltött item: " + item.getName());
+                Log.i(LOG_TAG, "Betöltött item: " + item.getName() + "\nid: " + item._getId());
             }
 
             if(items.size() == 0) {
@@ -95,7 +96,8 @@ public class MainActivity extends AppCompatActivity {
                     itemsPrice[i],
                     itemsInfo[i],
                     itemsRate.getFloat(i, 0),
-                    itemsImage.getResourceId(i, 0)));
+                    itemsImage.getResourceId(i, 0),
+                    0));
         }
 
         itemsImage.recycle();
@@ -193,5 +195,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
+    }
+
+    public void updateCount(Items currentItem) {
+        itemCollection.document(currentItem._getId()).update("count", currentItem.getCount() + 1).addOnSuccessListener(unused -> Log.d(LOG_TAG, "Sikeres count növelés!"));
+        queryData();
     }
 }

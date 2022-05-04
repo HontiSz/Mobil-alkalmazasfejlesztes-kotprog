@@ -67,7 +67,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> im
                 String filterPattern = charSequence.toString().toLowerCase().trim();
 
                 for(Items item : itemsAll) {
-                    if(item.getName().toLowerCase().contains(filterPattern)) {
+                    if(item.getName().toLowerCase().contains(filterPattern) || item.getInfo().toLowerCase().contains(filterPattern)) {
                         filteredList.add(item);
                     }
                 }
@@ -76,7 +76,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> im
                 results.values = filteredList;
             }
 
-            return null;
+            return results;
         }
 
         @Override
@@ -118,6 +118,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> im
             ratingBar.setRating(currentItem.getRate());
 
             Glide.with(context).load(currentItem.getImage()).into(itemImage);
+            itemView.findViewById(R.id.item_listAddCart).setOnClickListener(view -> ((MainActivity)context).updateCount(currentItem));
         }
     }
 }

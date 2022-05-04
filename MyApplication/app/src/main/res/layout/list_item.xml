@@ -59,7 +59,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/item_listPrice"
             android:text="@string/toCart"
-            android:layout_centerHorizontal="true"/>
+            android:layout_centerHorizontal="true"
+            android:onClick="toCart"/>
 
 
     </RelativeLayout>
