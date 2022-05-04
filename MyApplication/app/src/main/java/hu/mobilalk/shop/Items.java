@@ -5,7 +5,7 @@ public class Items {
     private String price;
     private String info;
     private float rate;
-    private final int image;
+    private int image;
 
     public Items(String name, String price, String info, float rate, int image) {
         this.name = name;
@@ -14,6 +14,8 @@ public class Items {
         this.rate = rate;
         this.image = image;
     }
+
+    public Items() {}
 
     public String getName() {
         return name;

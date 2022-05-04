@@ -12,8 +12,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.SearchView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 
@@ -25,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ArrayList<Items> items;
     private ItemAdapter itemAdapter;
+
+    private FirebaseFirestore firestore;
+    private CollectionReference itemCollection;
 
     private int gridNumber = 1;
     private boolean viewRow = true;
@@ -50,7 +57,29 @@ public class MainActivity extends AppCompatActivity {
         itemAdapter = new ItemAdapter(this, items);
         recyclerView.setAdapter(itemAdapter);
 
-        initializeData();
+        firestore = FirebaseFirestore.getInstance();
+        itemCollection = firestore.collection("Items");
+
+        queryData();
+    }
+
+    private void queryData() {
+        items.clear();
+
+        itemCollection.orderBy("name").limit(10).get().addOnSuccessListener(queryDocumentSnapshots -> {
+            for(QueryDocumentSnapshot snapshot : queryDocumentSnapshots) {
+                Items item = snapshot.toObject(Items.class);
+                items.add(item);
+                Log.i(LOG_TAG, "Betöltött item: " + item.getName());
+            }
+
+            if(items.size() == 0) {
+                initializeData();
+                queryData();
+            }
+
+            itemAdapter.notifyDataSetChanged();
+        });
     }
 
     private void initializeData() {
@@ -60,15 +89,16 @@ public class MainActivity extends AppCompatActivity {
         TypedArray itemsImage = getResources().obtainTypedArray(R.array.itemImages);
         TypedArray itemsRate = getResources().obtainTypedArray(R.array.itemRates);
 
-        items.clear();
-
         for(int i = 0; i < itemsList.length; i++) {
-            items.add(new Items(itemsList[i], itemsPrice[i], itemsInfo[i], itemsRate.getFloat(i, 0), itemsImage.getResourceId(i, 0)));
+            itemCollection.add(new Items(
+                    itemsList[i],
+                    itemsPrice[i],
+                    itemsInfo[i],
+                    itemsRate.getFloat(i, 0),
+                    itemsImage.getResourceId(i, 0)));
         }
 
         itemsImage.recycle();
-
-        itemAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -132,6 +162,7 @@ public class MainActivity extends AppCompatActivity {
         item.setIcon(ic_grid);
         GridLayoutManager layoutManager = (GridLayoutManager) recyclerView.getLayoutManager();
         layoutManager.setSpanCount(i);
+
     }
 
     @Override
