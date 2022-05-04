@@ -21,6 +21,8 @@
     <string name="logOut">Kijelentkezés</string>
     <string name="settings">Beállítások</string>
     <string name="select">Választ</string>
+    <string name="a_z"><![CDATA[a->z]]></string>
+    <string name="z_a"><![CDATA[z->a]]></string>
 
     <string-array name="itemTitles">
         <item>Kenyér</item>

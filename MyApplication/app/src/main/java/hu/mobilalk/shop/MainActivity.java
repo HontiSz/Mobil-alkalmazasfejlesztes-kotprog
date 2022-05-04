@@ -16,6 +16,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
@@ -32,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseFirestore firestore;
     private CollectionReference itemCollection;
 
+    private Query.Direction sort;
+    private boolean sortB;
+
     private int gridNumber = 1;
     private boolean viewRow = true;
 
@@ -41,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        sort = Query.Direction.ASCENDING;
+        sortB = true;
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         if(user != null) {
@@ -71,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
     private void queryData() {
         items.clear();
 
-        itemCollection.orderBy("name").limit(5).get().addOnSuccessListener(queryDocumentSnapshots -> {
+        itemCollection.orderBy("name", sort).limit(5).get().addOnSuccessListener(queryDocumentSnapshots -> {
             for(QueryDocumentSnapshot snapshot : queryDocumentSnapshots) {
                 Items item = snapshot.toObject(Items.class);
                 item.setId(snapshot.getId());
@@ -146,10 +153,6 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(LOG_TAG, "menuSetting clicked");
                 return true;
             }
-            case R.id.menuCart: {
-                Log.d(LOG_TAG, "menuCart clicked");
-                return true;
-            }
             case R.id.menuSelector: {
                 Log.d(LOG_TAG, "menuSelector clicked");
                 if(viewRow) {
@@ -159,6 +162,21 @@ public class MainActivity extends AppCompatActivity {
                     changeSpanCount(item, R.drawable.ic_row, 2);
                 }
                 return true;
+            }
+            case R.id.menuSort: {
+                Log.d(LOG_TAG, "menuSort clicked");
+                if(sortB) {
+                    sort = Query.Direction.DESCENDING;
+                    sortB = false;
+                    queryData();
+                    item.setTitle(R.string.a_z);
+                }
+                else {
+                    sort = Query.Direction.ASCENDING;
+                    sortB = true;
+                    queryData();
+                    item.setTitle(R.string.z_a);
+                }
             }
             default: return super.onOptionsItemSelected(item);
         }
