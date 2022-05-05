@@ -26,7 +26,7 @@
             android:layout_marginEnd="20dp"
             android:padding="8dp"
             android:text="@string/titlePlaceholder"
-            android:textColor="?android:textColorPrimaryInverse"
+            android:textColor="@android:color/holo_red_dark"
             android:textSize="25sp" />
 
         <RatingBar
@@ -52,11 +52,10 @@
             android:id="@+id/item_listPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/item_listSubTitle"
-            android:layout_alignParentStart="true"
+            android:layout_below="@+id/item_listTitle"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="342.5dp"
-            android:layout_marginEnd="342.5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
             android:layout_marginBottom="12dp"
             android:padding="8dp"
             android:text="@string/price"
