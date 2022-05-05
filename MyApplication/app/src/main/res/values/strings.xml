@@ -23,6 +23,7 @@
     <string name="a_z"><![CDATA[a->z]]></string>
     <string name="z_a"><![CDATA[z->a]]></string>
     <string name="deleteUser">Felhasználó törlése</string>
+    <string name="delete">Törlés</string>
 
     <string-array name="itemTitles">
         <item>Kenyér</item>
