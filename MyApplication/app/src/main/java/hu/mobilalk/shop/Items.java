@@ -51,8 +51,4 @@ public class Items {
     public void setId(String id) {
         this.id = id;
     }
-
-    public void setCount(int count) {
-        this.count = count;
-    }
 }

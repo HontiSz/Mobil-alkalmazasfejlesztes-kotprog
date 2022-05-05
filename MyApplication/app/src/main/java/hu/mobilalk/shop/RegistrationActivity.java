@@ -1,6 +1,5 @@
 package hu.mobilalk.shop;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -10,9 +9,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class RegistrationActivity extends AppCompatActivity {
@@ -48,7 +44,6 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     public void onRegistrating(View view) {
-        String username = usernameEt.getText().toString();
         String password = passwordEt.getText().toString();
         String passwordAgain = passwordAgainEt.getText().toString();
         String email = emailEt.getText().toString();

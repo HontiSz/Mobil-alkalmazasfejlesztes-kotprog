@@ -1,6 +1,5 @@
 package hu.mobilalk.shop;
 
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -10,8 +9,6 @@ import android.graphics.Color;
 import android.os.Build;
 
 import androidx.core.app.NotificationCompat;
-
-import com.google.firebase.database.collection.LLRBNode;
 
 public class NotificationHandler {
     private NotificationManager manager;
