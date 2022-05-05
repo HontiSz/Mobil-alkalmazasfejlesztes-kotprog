@@ -195,8 +195,9 @@ public class MainActivity extends AppCompatActivity {
     public void updateCount(Items currentItem) {
         itemCollection.document(currentItem._getId()).update("count", currentItem.getCount() + 1).addOnSuccessListener(unused -> Log.d(LOG_TAG, "Sikeres count növelés!"));
 
-        handler.sendNotification("Növelt count: " + currentItem.getName());
         queryData();
+
+        handler.sendNotification("Növelt count: " + currentItem.getName() + ", jelenleg: " + currentItem.getCount());
     }
 
     public void deleteItem(Items currentItem) {
