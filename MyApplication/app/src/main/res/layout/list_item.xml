@@ -6,7 +6,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/list_itemImageView"
@@ -23,8 +23,8 @@
             android:layout_below="@id/list_itemImageView"
             android:padding="8dp"
             android:text="@string/titlePlaceholder"
-            android:textSize="50sp"
-            android:textColor="?android:textColorPrimaryInverse"/>
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="50sp" />
 
         <RatingBar
             android:id="@+id/item_listRatingBar"
