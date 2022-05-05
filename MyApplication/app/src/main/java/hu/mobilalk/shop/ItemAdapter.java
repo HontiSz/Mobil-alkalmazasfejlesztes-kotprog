@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
@@ -16,8 +18,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Locale;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> implements Filterable {
 
@@ -42,6 +42,12 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> im
         Items currentItem = items.get(position);
 
         holder.bindTo(currentItem);
+
+        if(holder.getAdapterPosition() > lastPosition) {
+            Animation animation = AnimationUtils.loadAnimation(context, R.anim.animation);
+            holder.itemView.startAnimation(animation);
+            lastPosition = holder.getAdapterPosition();
+        }
     }
 
     @Override
@@ -103,13 +109,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> im
             priceText = itemView.findViewById(R.id.item_listPrice);
             itemImage = itemView.findViewById(R.id.list_itemImageView);
             ratingBar = itemView.findViewById(R.id.item_listRatingBar);
-
-            itemView.findViewById(R.id.item_listAddCart).setOnClickListener( new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                }
-            });
         }
 
         public void bindTo(Items currentItem) {
@@ -119,7 +118,11 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> im
             ratingBar.setRating(currentItem.getRate());
 
             Glide.with(context).load(currentItem.getImage()).into(itemImage);
-            itemView.findViewById(R.id.item_listAddCart).setOnClickListener(view -> ((MainActivity) context).updateCount(currentItem));
+            itemView.findViewById(R.id.item_listAddCart).setOnClickListener(view -> {
+                ((MainActivity) context).updateCount(currentItem);
+                Animation animation = AnimationUtils.loadAnimation(context, R.anim.image_animation);
+                itemView.findViewById(R.id.list_itemImageView).startAnimation(animation);
+            });
             itemView.findViewById(R.id.item_listDelete).setOnClickListener(view -> ((MainActivity) context).deleteItem(currentItem));
         }
     }
