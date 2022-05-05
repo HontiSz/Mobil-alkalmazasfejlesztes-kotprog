@@ -1,7 +1,9 @@
 package hu.mobilalk.shop;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.MenuItemCompat;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,6 +14,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.SearchView;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -197,6 +201,20 @@ public class MainActivity extends AppCompatActivity {
 
         handler.sendNotification("Növelt count: " + currentItem.getName());
         queryData();
+    }
+
+    public void deleteItem(Items currentItem) {
+        String name = currentItem.getName();
+        itemCollection.document(currentItem._getId()).delete().addOnSuccessListener(unused -> {
+            Log.d(LOG_TAG, "Törölt Item: " + name);
+
+            handler.sendNotification("Törölt Item: " + name);
+            queryData();
+        }).addOnFailureListener(e -> {
+            Log.d(LOG_TAG, "Sikertelen Item törlés; neve: " + name + " hiba: " + e.getMessage());
+
+            handler.sendNotification("Nem sikerült törölni az Item - t: " + name);
+        });
     }
 
     @Override
